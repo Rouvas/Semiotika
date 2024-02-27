@@ -125,7 +125,7 @@ export class ExtendedExpertService {
     const simpleRules = this.getSimpleRules();
     return simpleRules.filter(el => {
       if (el.parameter) {
-        return el.parameter.name === name;
+        return el.parameter.display === name;
       } else {
         return false
       }

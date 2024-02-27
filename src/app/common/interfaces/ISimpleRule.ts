@@ -2,13 +2,12 @@ export interface ISimpleRule {
   id: number,
   action: 'init' | 'enable' | 'exit',
   nextQuestion: number,
-  parameter?: IParameter,
-  attribute?: IAttribute,
+  parameter?: IValue,
+  attribute?: IValue,
 }
 
-export interface IParameter {
-  name: string,
+export interface IValue {
+  display: string,
   value: boolean | string | number
 }
 
-export type IAttribute = IParameter;

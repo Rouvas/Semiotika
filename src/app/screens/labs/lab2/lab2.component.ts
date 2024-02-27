@@ -16,7 +16,7 @@ import {IAnswer, IQuestion} from "../../../common/interfaces/IQuestion";
 import {INotebook} from "../../../common/interfaces/INotebook";
 import {ToolsService} from "../../../common/services/tools.service";
 import {ExtendedExpertService} from "./services/extended-expert.service";
-import {IParameter, ISimpleRule} from "../../../common/interfaces/ISimpleRule";
+import {IValue, ISimpleRule} from "../../../common/interfaces/ISimpleRule";
 import {IComplexRule, Operator, RuleElement} from "./interfaces/IComplexRule";
 
 @Component({
@@ -68,24 +68,22 @@ export class Lab2Component implements OnInit, OnDestroy {
       .subscribe(question => {
         if (!question) return;
 
-        const selectedParameters = this.expert.getParameters() as unknown as IParameter[];
+        const selectedParameters = this.expert.getParameters() as unknown as IValue[];
         const selectedAttributes = this.expert.getAttributes();
         const complexRules = this.expert.getComplexRules();
 
-        console.log(complexRules);
-        console.log(selectedParameters);
-        console.log(this.evaluateRules(selectedParameters, complexRules))
-
+        const state = this.evaluateRules(selectedParameters, complexRules)
+        console.log(state)
 
 
       })
   }
 
-  evaluateRules(selectedParameters: IParameter[], rules: IComplexRule[]): boolean[] {
-    return rules.map(rule => this.evaluateComplexRule(selectedParameters, rule));
+  evaluateRules(selectedParameters: IValue[], rules: IComplexRule[]): IComplexRule[] {
+    return rules.filter(rule => this.evaluateComplexRule(selectedParameters, rule));
   }
 
-  evaluateComplexRule(selectedParameters: IParameter[], rule: IComplexRule): boolean {
+  evaluateComplexRule(selectedParameters: IValue[], rule: IComplexRule): boolean {
     let result: boolean | null = null;
 
     for (let i = 0; i < rule.operations.length; i++) {
@@ -96,14 +94,11 @@ export class Lab2Component implements OnInit, OnDestroy {
         continue;
       } else if (element === 'NOT') {
         i++; // Переходим к следующему элементу
-        const nextElement = rule.operations[i] as IParameter;
+        const nextElement = rule.operations[i] as IValue;
         currentResult = !this.matchesParameter(selectedParameters, nextElement);
       } else {
         currentResult = this.matchesParameter(selectedParameters, element);
-        console.log('------')
-        console.log(selectedParameters)
-        console.log(element)
-        console.log('------')
+        console.log(currentResult)
       }
 
       if (result === null) {
@@ -117,8 +112,8 @@ export class Lab2Component implements OnInit, OnDestroy {
     return result ?? false;
   }
 
-  matchesParameter(selectedParameters: IParameter[], parameter: IParameter): boolean {
-    const foundParameter = selectedParameters.find(p => p.name === parameter.name);
+  matchesParameter(selectedParameters: IValue[], parameter: IValue): boolean {
+    const foundParameter = selectedParameters.find(p => p.display === parameter.display);
     return foundParameter !== undefined && foundParameter.value === parameter.value;
   }
 
@@ -185,7 +180,7 @@ export class Lab2Component implements OnInit, OnDestroy {
     this.loading = 'loading';
     if (question.parameter) {
       const simpleRules = this.expert.getSimpleRules();
-      const findMatchSimpleRule = simpleRules.filter(el => el.parameter?.name === question.parameter)
+      const findMatchSimpleRule = simpleRules.filter(el => el.parameter?.display === question.parameter)
         .find(el => el.parameter?.value === this.answerControl.value)
 
       if (findMatchSimpleRule && findMatchSimpleRule.parameter) {
@@ -193,7 +188,7 @@ export class Lab2Component implements OnInit, OnDestroy {
           this.multiAnswerFormArray.getRawValue().forEach(el => {
             if (el[Object.keys(el)[0]] === true && findMatchSimpleRule.parameter) {
               this.expert.addAnswer({
-                display: findMatchSimpleRule.parameter.name,
+                display: findMatchSimpleRule.parameter.display,
                 value: this.tools.convertToNumber(Object.keys(el)[0])
               }, 'attribute')
             } else {
@@ -202,7 +197,7 @@ export class Lab2Component implements OnInit, OnDestroy {
           })
         } else {
           this.expert.addAnswer({
-            display: findMatchSimpleRule.parameter.name,
+            display: findMatchSimpleRule.parameter.display,
             value: this.tools.convertToNumber(this.answerControl.getRawValue())
           }, 'parameter');
         }

@@ -3686,7 +3686,7 @@
       "id": "1",
       "action": "enable",
       "parameter": {
-        "name": "typec",
+        "display": "typec",
         "value": true
       },
       "nextQuestion": 3
@@ -3695,7 +3695,7 @@
       "id": "2",
       "action": "enable",
       "parameter": {
-        "name": "typec",
+        "display": "typec",
         "value": false
       },
       "nextQuestion": 7
@@ -3704,7 +3704,7 @@
       "id": "3",
       "action": "enable",
       "parameter": {
-        "name": "biometric",
+        "display": "biometric",
         "value": true
       },
       "nextQuestion": 8
@@ -3713,7 +3713,7 @@
       "id": "4",
       "action": "enable",
       "parameter": {
-        "name": "biometric",
+        "display": "biometric",
         "value": false
       },
       "nextQuestion": 10
@@ -3722,7 +3722,7 @@
       "id": "5",
       "action": "enable",
       "parameter": {
-        "name": "notebook_type",
+        "display": "notebook_type",
         "value": true
       },
       "nextQuestion": 12
@@ -3731,7 +3731,7 @@
       "id": "6",
       "action": "enable",
       "parameter": {
-        "name": "notebook_type",
+        "display": "notebook_type",
         "value": false
       },
       "nextQuestion": 11
@@ -3740,7 +3740,7 @@
       "id": "7",
       "action": "enable",
       "parameter": {
-        "name": "videocard",
+        "display": "videocard",
         "value": true
       },
       "nextQuestion": 14
@@ -3749,7 +3749,7 @@
       "id": "8",
       "action": "enable",
       "parameter": {
-        "name": "videocard",
+        "display": "videocard",
         "value": false
       },
       "nextQuestion": 16
@@ -3758,7 +3758,7 @@
       "id": "9",
       "action": "enable",
       "parameter": {
-        "name": "core_counter",
+        "display": "core_counter",
         "value": true
       },
       "nextQuestion": 19
@@ -3767,7 +3767,7 @@
       "id": "10",
       "action": "enable",
       "parameter": {
-        "name": "core_counter",
+        "display": "core_counter",
         "value": false
       },
       "nextQuestion": 20
@@ -3776,7 +3776,7 @@
       "id": "11",
       "action": "enable",
       "parameter": {
-        "name": "keyboard_variants",
+        "display": "keyboard_variants",
         "value": true
       },
       "nextQuestion": 21
@@ -3785,7 +3785,7 @@
       "id": "12",
       "action": "enable",
       "parameter": {
-        "name": "keyboard_variants",
+        "display": "keyboard_variants",
         "value": false
       },
       "nextQuestion": 24
@@ -3794,7 +3794,7 @@
       "id": "13",
       "action": "enable",
       "parameter": {
-        "name": "external_monitor",
+        "display": "external_monitor",
         "value": true
       },
       "nextQuestion": 25
@@ -3803,7 +3803,7 @@
       "id": "14",
       "action": "enable",
       "parameter": {
-        "name": "external_monitor",
+        "display": "external_monitor",
         "value": false
       },
       "nextQuestion": 27
@@ -3812,7 +3812,7 @@
       "id": "15",
       "action": "enable",
       "parameter": {
-        "name": "external_inputs",
+        "display": "external_inputs",
         "value": true
       },
       "nextQuestion": 28
@@ -3821,7 +3821,7 @@
       "id": "16",
       "action": "enable",
       "parameter": {
-        "name": "external_inputs",
+        "display": "external_inputs",
         "value": false
       },
       "nextQuestion": 30
@@ -3830,7 +3830,7 @@
       "id": "17",
       "action": "enable",
       "parameter": {
-        "name": "ram_detail",
+        "display": "ram_detail",
         "value": true
       },
       "nextQuestion": 31
@@ -3839,7 +3839,7 @@
       "id": "18",
       "action": "enable",
       "parameter": {
-        "name": "ram_detail",
+        "display": "ram_detail",
         "value": false
       },
       "nextQuestion": 36
@@ -3848,7 +3848,7 @@
       "id": "19",
       "action": "enable",
       "parameter": {
-        "name": "more_ram",
+        "display": "more_ram",
         "value": true
       },
       "nextQuestion": 34
@@ -3857,7 +3857,7 @@
       "id": "20",
       "action": "enable",
       "parameter": {
-        "name": "more_ram",
+        "display": "more_ram",
         "value": false
       },
       "nextQuestion": 36
@@ -3866,7 +3866,7 @@
       "id": "21",
       "action": "enable",
       "parameter": {
-        "name": "different_brand",
+        "display": "different_brand",
         "value": true
       },
       "nextQuestion": 38
@@ -3875,7 +3875,7 @@
       "id": "22",
       "action": "enable",
       "parameter": {
-        "name": "different_brand",
+        "display": "different_brand",
         "value": false
       },
       "nextQuestion": 39
@@ -3884,7 +3884,7 @@
       "id": "23",
       "action": "enable",
       "parameter": {
-        "name": "need_sensor",
+        "display": "need_sensor",
         "value": true
       },
       "nextQuestion": 41
@@ -3893,7 +3893,7 @@
       "id": "24",
       "action": "enable",
       "parameter": {
-        "name": "need_sensor",
+        "display": "need_sensor",
         "value": false
       },
       "nextQuestion": 42
@@ -3902,7 +3902,7 @@
       "id": "25",
       "action": "enable",
       "parameter": {
-        "name": "brand_apple",
+        "display": "brand_apple",
         "value": true
       },
       "nextQuestion": 1
@@ -3911,13 +3911,12 @@
   "rules_v2": [
     {
       "id": "0",
-      "operations": [{
-        "name": "brand_apple",
-        "value": true
-      }, "AND", {
-        "name": "brand_apple",
-        "value": true
-      }],
+      "operations": [
+        {
+          "display": "brand_apple",
+          "value": true
+        }
+      ],
       "setAnswers": [
         {
           "display": "Product_Brand",

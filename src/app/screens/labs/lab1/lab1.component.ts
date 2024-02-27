@@ -124,7 +124,7 @@ export class Lab1Component implements OnInit {
 
     if (question.parameter) {
       const rules = this.expert.getRules();
-      const findMatchRule = rules.filter(el => el.parameter?.name === question.parameter)
+      const findMatchRule = rules.filter(el => el.parameter?.display === question.parameter)
         .find(el => el.parameter?.value === this.answerControl.value)
       if (findMatchRule) {
         const nextQuestion = this.expert.getQuestion(findMatchRule.nextQuestion);
