@@ -5,6 +5,7 @@ interface IBaseQuestion {
   parameter: string | null,
   attribute: string | null,
   nextQuestion: number,
+  hide: boolean
 }
 
 interface IMultiChooseQuestion extends IBaseQuestion {

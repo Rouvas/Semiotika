@@ -75,6 +75,14 @@ export class ExtendedExpertService {
     }
   }
 
+  getAttributes() {
+    return this.selectedAttributes.getValue()
+  }
+
+  getParameters() {
+    return this.selectedParameters.getValue();
+  }
+
   getRuleByAction(type: string) {
     return this.simpleRules.getValue().find(el => el.action === type) || null;
   }
@@ -92,7 +100,10 @@ export class ExtendedExpertService {
           el[key] = this.tools.convertToNumber(value);
         }
       });
-      return el;
+      return {
+        ...el,
+        hide: false,
+      };
     });
     this.questions.next(data)
   }
@@ -109,12 +120,53 @@ export class ExtendedExpertService {
   setSimpleRules(data: any[]) {
     this.simpleRules.next(data)
   }
+
+  getSimpleRulesByName(name: string) {
+    const simpleRules = this.getSimpleRules();
+    return simpleRules.filter(el => {
+      if (el.parameter) {
+        return el.parameter.name === name;
+      } else {
+        return false
+      }
+    })
+  }
+
+  getSimpleRules() {
+    return this.simpleRules.getValue();
+  }
+
   fetchComplexRules() {
     return this.http.get('/rules_v2')
   }
 
   setComplexRules(data: any[]) {
-    this.complexRules.next(data)
+    const mappedData = data.map(el => {
+      return {
+        ...el,
+        used: false
+      }
+    })
+    this.complexRules.next(mappedData)
+  }
+
+  setUsedComplexRule(id: number) {
+    const rules = this.getComplexRules()
+    rules.map(el => {
+      if (el.id === id) {
+        return {
+          ...el,
+          used: true
+        }
+      } else {
+        return el
+      }
+    })
+    this.complexRules.next(rules);
+  }
+
+  getComplexRules() {
+    return this.complexRules.getValue();
   }
 
   fetchDataset() {

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {AsyncPipe, NgForOf, NgIf, NgSwitch, NgSwitchCase} from "@angular/common";
 import {
   FormArray,
@@ -11,12 +11,13 @@ import {
 } from "@angular/forms";
 import {TuiButtonModule, TuiLoaderModule, TuiTextfieldControllerModule} from "@taiga-ui/core";
 import {TuiCheckboxLabeledModule, TuiInputNumberModule, TuiRadioLabeledModule} from "@taiga-ui/kit";
-import {Observable, take} from "rxjs";
-import {IQuestion} from "../../../common/interfaces/IQuestion";
+import {Observable, take, takeWhile} from "rxjs";
+import {IAnswer, IQuestion} from "../../../common/interfaces/IQuestion";
 import {INotebook} from "../../../common/interfaces/INotebook";
 import {ToolsService} from "../../../common/services/tools.service";
 import {ExtendedExpertService} from "./services/extended-expert.service";
-import {ISimpleRule} from "../../../common/interfaces/ISimpleRule";
+import {IParameter, ISimpleRule} from "../../../common/interfaces/ISimpleRule";
+import {IComplexRule, Operator, RuleElement} from "./interfaces/IComplexRule";
 
 @Component({
   selector: 'app-lab2',
@@ -39,9 +40,10 @@ import {ISimpleRule} from "../../../common/interfaces/ISimpleRule";
   templateUrl: './lab2.component.html',
   styleUrl: './lab2.component.scss'
 })
-export class Lab2Component implements OnInit {
+export class Lab2Component implements OnInit, OnDestroy {
   loading: 'loading' | 'question' | 'complete' = 'loading';
   error!: string;
+  alive = true;
 
   currentQuestion!: Observable<IQuestion | null>
   counterQuestion!: Observable<number>;
@@ -58,13 +60,87 @@ export class Lab2Component implements OnInit {
     this.multiAnswersForm = this.fb.group({
       answers: this.fb.array([])
     });
+
+
+    // Подписка на получение каждого нового вопроса
+    this.currentQuestion
+      .pipe(takeWhile(() => this.alive))
+      .subscribe(question => {
+        if (!question) return;
+
+        const selectedParameters = this.expert.getParameters() as unknown as IParameter[];
+        const selectedAttributes = this.expert.getAttributes();
+        const complexRules = this.expert.getComplexRules();
+
+        console.log(complexRules);
+        console.log(selectedParameters);
+        console.log(this.evaluateRules(selectedParameters, complexRules))
+
+
+
+      })
   }
 
+  evaluateRules(selectedParameters: IParameter[], rules: IComplexRule[]): boolean[] {
+    return rules.map(rule => this.evaluateComplexRule(selectedParameters, rule));
+  }
+
+  evaluateComplexRule(selectedParameters: IParameter[], rule: IComplexRule): boolean {
+    let result: boolean | null = null;
+
+    for (let i = 0; i < rule.operations.length; i++) {
+      let currentResult: boolean = false;
+      const element = rule.operations[i];
+
+      if (element === 'AND' || element === 'OR') {
+        continue;
+      } else if (element === 'NOT') {
+        i++; // Переходим к следующему элементу
+        const nextElement = rule.operations[i] as IParameter;
+        currentResult = !this.matchesParameter(selectedParameters, nextElement);
+      } else {
+        currentResult = this.matchesParameter(selectedParameters, element);
+        console.log('------')
+        console.log(selectedParameters)
+        console.log(element)
+        console.log('------')
+      }
+
+      if (result === null) {
+        result = currentResult;
+      } else {
+        const operation: Operator = rule.operations[i - 1] as Operator;
+        result = this.evaluateOperation(result, currentResult, operation);
+      }
+    }
+
+    return result ?? false;
+  }
+
+  matchesParameter(selectedParameters: IParameter[], parameter: IParameter): boolean {
+    const foundParameter = selectedParameters.find(p => p.name === parameter.name);
+    return foundParameter !== undefined && foundParameter.value === parameter.value;
+  }
+
+  evaluateOperation(result: boolean, currentResult: boolean, operation: Operator): boolean {
+    switch (operation) {
+      case 'AND':
+        return result && currentResult;
+      case 'OR':
+        return result || currentResult;
+      default:
+        return result; // На случай, если операция не определена
+    }
+  }
 
   ngOnInit() {
     this.expert.loadData()
       .pipe(take(1))
       .subscribe(() => this.startExpert())
+  }
+
+  ngOnDestroy() {
+    this.alive = false;
   }
 
   startExpert() {
@@ -106,7 +182,80 @@ export class Lab2Component implements OnInit {
   }
 
   answerQuestion(question: IQuestion) {
+    this.loading = 'loading';
+    if (question.parameter) {
+      const simpleRules = this.expert.getSimpleRules();
+      const findMatchSimpleRule = simpleRules.filter(el => el.parameter?.name === question.parameter)
+        .find(el => el.parameter?.value === this.answerControl.value)
 
+      if (findMatchSimpleRule && findMatchSimpleRule.parameter) {
+        if (question.type === 'multi_choose') {
+          this.multiAnswerFormArray.getRawValue().forEach(el => {
+            if (el[Object.keys(el)[0]] === true && findMatchSimpleRule.parameter) {
+              this.expert.addAnswer({
+                display: findMatchSimpleRule.parameter.name,
+                value: this.tools.convertToNumber(Object.keys(el)[0])
+              }, 'attribute')
+            } else {
+              console.warn('Не найден параметр')
+            }
+          })
+        } else {
+          this.expert.addAnswer({
+            display: findMatchSimpleRule.parameter.name,
+            value: this.tools.convertToNumber(this.answerControl.getRawValue())
+          }, 'parameter');
+        }
+        const nextQuestion = this.expert.getQuestion(findMatchSimpleRule.nextQuestion);
+        if (nextQuestion) {
+          this.expert.showQuestion(nextQuestion)
+          this.answerControl.reset();
+          return;
+        } else {
+          console.error('Не найден следующий вопрос по правилу')
+        }
+      } else {
+        console.error('Не найден параметр указанный в правиле в вопросе или не найден параметр в правиле')
+      }
+
+      this.loading = 'question';
+    }
+
+    if (question.attribute) {
+      const attribute = question.attribute
+      if (question.type === 'multi_choose') {
+        this.multiAnswerFormArray.getRawValue().forEach(el => {
+          if (el[Object.keys(el)[0]] === true) {
+            this.expert.addAnswer({
+              display: attribute,
+              value: this.tools.convertToNumber(Object.keys(el)[0])
+            }, 'attribute')
+          }
+        })
+      } else {
+        this.expert.addAnswer({
+          display: attribute,
+          value: this.tools.convertToNumber(this.answerControl.getRawValue())
+        }, 'attribute')
+      }
+    }
+
+
+
+    const nextQuestion = this.expert.getQuestion(question.nextQuestion)
+    if (nextQuestion) {
+      this.expert.showQuestion(nextQuestion);
+      if (question.type === 'multi_choose') {
+        this.processMultiQuestion(question)
+      }
+      this.answerControl.reset();
+      this.loading = 'question';
+      return;
+    } else {
+      console.log('Закончил он')
+      this.loading = 'complete'
+      this.expert.findDevices()
+    }
   }
 
   get multiAnswerFormArray(): FormArray {

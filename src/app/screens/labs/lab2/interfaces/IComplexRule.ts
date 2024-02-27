@@ -1,11 +1,12 @@
 import {IParameter} from "../../../../common/interfaces/ISimpleRule";
+import {IAnswer} from "../../../../common/interfaces/IQuestion";
 
 export interface IComplexRule {
   id: number,
-  operation: 'AND' | 'OR' | 'NOT'
-  parameters: IParameter[];
-  attributes: IParameter[];
-  setParameters: IParameter[];
-  setAttributes: IParameter[];
-  used: boolean
+  operations: RuleElement[]
+  setAnswers: IAnswer[] | IParameter[];
+  used: boolean,
 }
+
+export type RuleElement = Operator | IParameter;
+export type Operator = 'AND' | 'OR' | 'NOT';

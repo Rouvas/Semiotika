@@ -3897,12 +3897,33 @@
         "value": false
       },
       "nextQuestion": 42
+    },
+    {
+      "id": "25",
+      "action": "enable",
+      "parameter": {
+        "name": "brand_apple",
+        "value": true
+      },
+      "nextQuestion": 1
     }
   ],
   "rules_v2": [
     {
-      "id": "0"
-
+      "id": "0",
+      "operations": [{
+        "name": "brand_apple",
+        "value": true
+      }, "AND", {
+        "name": "brand_apple",
+        "value": true
+      }],
+      "setAnswers": [
+        {
+          "display": "Product_Brand",
+          "value": "Apple"
+        }
+      ]
     }
   ],
   "questions_v1": [
@@ -4908,6 +4929,17 @@
     }
   ],
   "questions_v2": [
-
+    {
+      "id": "0",
+      "question": "Вас интересует бренд Apple?",
+      "type": "yes/no",
+      "parameter": "brand_apple"
+    },
+    {
+      "id": "1",
+      "question": "Вас интересует бренд Hyesos?",
+      "type": "yes/no",
+      "parameter": "brand_hyesos"
+    }
   ]
 }
