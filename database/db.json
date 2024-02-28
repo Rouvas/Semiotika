@@ -4930,12 +4930,18 @@
   "questions_v2": [
     {
       "id": "0",
+      "question": "Ваш бюджет",
+      "type": "input",
+      "attribute": "Price"
+    },
+    {
+      "id": "1",
       "question": "Вас интересует бренд Apple?",
       "type": "yes/no",
       "parameter": "brand_apple"
     },
     {
-      "id": "1",
+      "id": "2",
       "question": "Вас интересует бренд Hyesos?",
       "type": "yes/no",
       "parameter": "brand_hyesos"

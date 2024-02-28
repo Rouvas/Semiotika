@@ -30,6 +30,17 @@ export class ExtendedExpertService {
 
   constructor(private http: HttpService, private tools: ToolsService) { }
 
+  reset() {
+    this.questionCounter.next(-1);
+    this.currentQuestion.next(null);
+    this.simpleRules.next([]);
+    this.complexRules.next([]);
+    this.dataset.next([]);
+    this.selectedParameters.next([]);
+    this.selectedAttributes.next([]);
+    this.findNotebooks.next([]);
+  }
+
   loadData() {
     return combineLatest([
       this.fetchQuestions(),

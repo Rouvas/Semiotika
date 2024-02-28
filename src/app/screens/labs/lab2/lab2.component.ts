@@ -72,8 +72,10 @@ export class Lab2Component implements OnInit, OnDestroy {
         const selectedAttributes = this.expert.getAttributes();
         const complexRules = this.expert.getComplexRules();
 
-        const state = this.evaluateRules(selectedParameters, complexRules)
-        console.log(state)
+        const evaluateComplexRulesByParameters = this.evaluateRules(selectedParameters, complexRules);
+        const evaluateComplexRulesByAttributes = this.evaluateRules(selectedAttributes, complexRules)
+        console.log(evaluateComplexRulesByParameters)
+        console.log(evaluateComplexRulesByAttributes);
 
 
       })
@@ -83,7 +85,7 @@ export class Lab2Component implements OnInit, OnDestroy {
     return rules.filter(rule => this.evaluateComplexRule(selectedParameters, rule));
   }
 
-  evaluateComplexRule(selectedParameters: IValue[], rule: IComplexRule): boolean {
+  evaluateComplexRule(selectedValues: IValue[], rule: IComplexRule): boolean {
     let result: boolean | null = null;
 
     for (let i = 0; i < rule.operations.length; i++) {
@@ -94,11 +96,21 @@ export class Lab2Component implements OnInit, OnDestroy {
         continue;
       } else if (element === 'NOT') {
         i++; // Переходим к следующему элементу
+        const tempNextElement = rule.operations[i];
+        if (tempNextElement === '>' || tempNextElement === '<' || tempNextElement === '>=' || tempNextElement === '<=') {
+          i++;
+          const nextElement = rule.operations[i] as IValue;
+          currentResult = this.matchesNumberValue(selectedValues, nextElement, tempNextElement)
+        } else {
+          const nextElement = rule.operations[i] as IValue;
+          currentResult = !this.matchesValue(selectedValues, nextElement);
+        }
+      } else if (element === '>=' || (element === '<=') || (element === '>') || (element === '<')) {
+        i++;
         const nextElement = rule.operations[i] as IValue;
-        currentResult = !this.matchesParameter(selectedParameters, nextElement);
+        currentResult = this.matchesNumberValue(selectedValues, nextElement, element)
       } else {
-        currentResult = this.matchesParameter(selectedParameters, element);
-        console.log(currentResult)
+        currentResult = this.matchesValue(selectedValues, element);
       }
 
       if (result === null) {
@@ -112,8 +124,25 @@ export class Lab2Component implements OnInit, OnDestroy {
     return result ?? false;
   }
 
-  matchesParameter(selectedParameters: IValue[], parameter: IValue): boolean {
-    const foundParameter = selectedParameters.find(p => p.display === parameter.display);
+  matchesNumberValue(selectedValues: IValue[], parameter: IValue, element: '>=' | '<=' | '>' | '<'): boolean {
+    const foundValue = selectedValues.find(p => p.display === parameter.display)
+    if (!foundValue) return false;
+    if (typeof foundValue.value !== 'number' || typeof parameter.value !== 'number') return false;
+
+    if (element === '>=') {
+      return foundValue.value >= parameter.value
+    } else if (element === '<=') {
+      return parameter.value >= foundValue.value
+    } else if (element === '>') {
+      return  foundValue.value > parameter.value
+    } else if (element === '<') {
+      return parameter.value > foundValue.value
+    }
+    return false
+  }
+
+  matchesValue(selectedValues: IValue[], parameter: IValue): boolean {
+    const foundParameter = selectedValues.find(p => p.display === parameter.display);
     return foundParameter !== undefined && foundParameter.value === parameter.value;
   }
 
@@ -136,6 +165,7 @@ export class Lab2Component implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.alive = false;
+    this.expert.reset();
   }
 
   startExpert() {

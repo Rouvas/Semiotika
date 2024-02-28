@@ -9,4 +9,4 @@ export interface IComplexRule {
 }
 
 export type RuleElement = Operator | IValue;
-export type Operator = 'AND' | 'OR' | 'NOT';
+export type Operator = 'AND' | 'OR' | 'NOT' | '>=' | '<=' | '>' | '<';
