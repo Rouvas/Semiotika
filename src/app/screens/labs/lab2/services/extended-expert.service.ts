@@ -203,10 +203,11 @@ export class ExtendedExpertService {
         // Проверяем, есть ли у элемента заданный ключ
         if (el[key] === undefined) return false;
         if (key === 'Price') {
-          return Number(groupedAttributes[key][0]) > el[key]
+          return Number(groupedAttributes[key][0]) < el[key]
         }
         const elValue = el[key].toString();
         // Проверяем, соответствует ли значение элемента хотя бы одному из выбранных значений атрибута
+        console.log(groupedAttributes[key].includes(elValue))
         return groupedAttributes[key].includes(elValue);
       });
     });
