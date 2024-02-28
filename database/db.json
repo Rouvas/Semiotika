@@ -3905,13 +3905,19 @@
         "display": "brand_apple",
         "value": true
       },
-      "nextQuestion": 1
+      "nextQuestion": 2
     }
   ],
   "rules_v2": [
     {
-      "id": "0",
+      "id": "1",
       "operations": [
+        ">",
+        {
+          "display": "Price",
+          "value": 50000
+        },
+        "AND",
         {
           "display": "brand_apple",
           "value": true
@@ -4932,19 +4938,15 @@
       "id": "0",
       "question": "Ваш бюджет",
       "type": "input",
-      "attribute": "Price"
+      "attribute": "Price",
+      "nextQuestion": 1
     },
     {
       "id": "1",
       "question": "Вас интересует бренд Apple?",
       "type": "yes/no",
-      "parameter": "brand_apple"
-    },
-    {
-      "id": "2",
-      "question": "Вас интересует бренд Hyesos?",
-      "type": "yes/no",
-      "parameter": "brand_hyesos"
+      "parameter": "brand_apple",
+      "nextQuestion": 2
     }
   ]
 }

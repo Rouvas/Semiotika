@@ -65,7 +65,11 @@ export class ExtendedExpertService {
     return this.getRuleByAction('init')
   }
 
-  showQuestion(value: IQuestion) {
+  getCounter() {
+    return this.questionCounter.getValue();
+  }
+
+  showQuestion(value: IQuestion | null) {
     this.currentQuestion.next(value);
     if (this.questionCounter.getValue() === -1) {
       this.questionCounter.next(1)
@@ -124,6 +128,10 @@ export class ExtendedExpertService {
     return question || null
   }
 
+  getQuestions() {
+    return this.questions.getValue();
+  }
+
   fetchSimpleRules() {
     return this.http.get('/rules_v1')
   }
@@ -161,21 +169,6 @@ export class ExtendedExpertService {
     this.complexRules.next(mappedData)
   }
 
-  setUsedComplexRule(id: number) {
-    const rules = this.getComplexRules()
-    rules.map(el => {
-      if (el.id === id) {
-        return {
-          ...el,
-          used: true
-        }
-      } else {
-        return el
-      }
-    })
-    this.complexRules.next(rules);
-  }
-
   getComplexRules() {
     return this.complexRules.getValue();
   }
@@ -190,6 +183,7 @@ export class ExtendedExpertService {
 
   findDevices() {
     const selectedAttributes = this.selectedAttributes.getValue();
+    console.log(selectedAttributes)
     const dataset = this.dataset.getValue();
 
     // Группируем атрибуты по ключам
@@ -208,7 +202,9 @@ export class ExtendedExpertService {
       return Object.keys(groupedAttributes).every(key => {
         // Проверяем, есть ли у элемента заданный ключ
         if (el[key] === undefined) return false;
-
+        if (key === 'Price') {
+          return Number(groupedAttributes[key][0]) > el[key]
+        }
         const elValue = el[key].toString();
         // Проверяем, соответствует ли значение элемента хотя бы одному из выбранных значений атрибута
         return groupedAttributes[key].includes(elValue);
@@ -217,6 +213,5 @@ export class ExtendedExpertService {
 
     this.findNotebooks.next(newDataset)
   }
-
 
 }

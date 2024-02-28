@@ -66,17 +66,95 @@ export class Lab2Component implements OnInit, OnDestroy {
     this.currentQuestion
       .pipe(takeWhile(() => this.alive))
       .subscribe(question => {
-        if (!question) return;
-
-        const selectedParameters = this.expert.getParameters() as unknown as IValue[];
+        const selectedParameters = this.expert.getParameters();
         const selectedAttributes = this.expert.getAttributes();
         const complexRules = this.expert.getComplexRules();
 
-        const evaluateComplexRulesByParameters = this.evaluateRules(selectedParameters, complexRules);
-        const evaluateComplexRulesByAttributes = this.evaluateRules(selectedAttributes, complexRules)
-        console.log(evaluateComplexRulesByParameters)
-        console.log(evaluateComplexRulesByAttributes);
+        const concatAttributes = selectedParameters.concat(selectedAttributes)
+        const evaluateComplexRules = this.evaluateRules(concatAttributes, complexRules)
 
+        evaluateComplexRules.map(el => {
+          if (el.used) {
+            return el
+          } else {
+            el.setAnswers.forEach(answer => {
+              const findParameter = this.expert.getQuestions().find(question => {
+                if (question.parameter) {
+                  return question.parameter === answer.display
+                } else {
+                  return false
+                }
+              })
+              if (findParameter) {
+                console.log('Set parameter')
+                this.expert.addAnswer(answer, 'parameter')
+              } else {
+                console.log('Set attribute')
+                this.expert.addAnswer(answer, 'attribute')
+              }
+            })
+            return {
+              ...el,
+              used: true
+            }
+          }
+        })
+
+        if (!question) {
+          this.expert.findDevices();
+
+          if (this.expert.getCounter() > 1) {
+            this.loading = 'complete';
+          }
+
+          return;
+        }
+
+        if (question.parameter) {
+          const findSelectedParameter = selectedParameters.find(selected => {
+            return question.parameter === selected.display
+          })
+
+          if (findSelectedParameter) {
+            const parameters = this.expert.getSimpleRulesByName(findSelectedParameter.display)
+            const foundParameter = parameters.find(el => el.parameter?.display === findSelectedParameter.display)
+            if (foundParameter) {
+              const nextQuestion = this.expert.getQuestion(foundParameter.nextQuestion);
+              if (!nextQuestion) {
+                this.expert.findDevices();
+                this.loading = 'complete';
+                return;
+              }
+              this.expert.showQuestion(nextQuestion);
+              if (question.type === 'multi_choose') {
+                this.processMultiQuestion(question);
+              }
+              this.answerControl.reset();
+            }
+          }
+
+        } else if (question.attribute) {
+          const findSelectedAttribute = selectedAttributes.find(attr => attr.display === question.attribute)
+          if (findSelectedAttribute) {
+            if (question.attribute === findSelectedAttribute.display) {
+              const nextQuestion = this.expert.getQuestion(question.nextQuestion)
+              if (!nextQuestion) {
+                this.expert.findDevices();
+                this.loading = 'complete';
+                return;
+              }
+              this.expert.showQuestion(nextQuestion);
+              if (question.type === 'multi_choose') {
+                this.processMultiQuestion(question);
+              }
+              this.answerControl.reset();
+            }
+          }
+
+        } else {
+          this.expert.findDevices();
+          this.loading = 'complete'
+        }
 
       })
   }
@@ -235,6 +313,7 @@ export class Lab2Component implements OnInit, OnDestroy {
         if (nextQuestion) {
           this.expert.showQuestion(nextQuestion)
           this.answerControl.reset();
+          this.loading = "question"
           return;
         } else {
           console.error('Не найден следующий вопрос по правилу')
@@ -277,9 +356,10 @@ export class Lab2Component implements OnInit, OnDestroy {
       this.loading = 'question';
       return;
     } else {
-      console.log('Закончил он')
-      this.loading = 'complete'
-      this.expert.findDevices()
+      this.expert.showQuestion(null)
+      // console.log('Закончил он')
+      // this.loading = 'complete'
+      // this.expert.findDevices()
     }
   }
 
