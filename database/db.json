@@ -3921,7 +3921,7 @@
         "display": "typec",
         "value": true
       },
-      "nextQuestion": 3
+      "nextQuestion": 5
     },
     {
       "id": "2",
@@ -3930,7 +3930,7 @@
         "display": "typec",
         "value": false
       },
-      "nextQuestion": 7
+      "nextQuestion": 9
     },
     {
       "id": "3",
@@ -3939,7 +3939,7 @@
         "display": "biometric",
         "value": true
       },
-      "nextQuestion": 8
+      "nextQuestion": 10
     },
     {
       "id": "4",
@@ -3948,7 +3948,7 @@
         "display": "biometric",
         "value": false
       },
-      "nextQuestion": 10
+      "nextQuestion": 12
     },
     {
       "id": "5",
@@ -3957,7 +3957,7 @@
         "display": "notebook_type",
         "value": true
       },
-      "nextQuestion": 12
+      "nextQuestion": 14
     },
     {
       "id": "6",
@@ -3966,7 +3966,7 @@
         "display": "notebook_type",
         "value": false
       },
-      "nextQuestion": 11
+      "nextQuestion": 13
     },
     {
       "id": "7",
@@ -3975,7 +3975,7 @@
         "display": "videocard",
         "value": true
       },
-      "nextQuestion": 14
+      "nextQuestion": 16
     },
     {
       "id": "8",
@@ -3984,7 +3984,7 @@
         "display": "videocard",
         "value": false
       },
-      "nextQuestion": 16
+      "nextQuestion": 18
     },
     {
       "id": "9",
@@ -3993,7 +3993,7 @@
         "display": "core_counter",
         "value": true
       },
-      "nextQuestion": 19
+      "nextQuestion": 21
     },
     {
       "id": "10",
@@ -4002,7 +4002,7 @@
         "display": "core_counter",
         "value": false
       },
-      "nextQuestion": 20
+      "nextQuestion": 22
     },
     {
       "id": "11",
@@ -4011,7 +4011,7 @@
         "display": "keyboard_variants",
         "value": true
       },
-      "nextQuestion": 21
+      "nextQuestion": 23
     },
     {
       "id": "12",
@@ -4020,7 +4020,7 @@
         "display": "keyboard_variants",
         "value": false
       },
-      "nextQuestion": 24
+      "nextQuestion": 26
     },
     {
       "id": "13",
@@ -4029,7 +4029,7 @@
         "display": "external_monitor",
         "value": true
       },
-      "nextQuestion": 25
+      "nextQuestion": 27
     },
     {
       "id": "14",
@@ -4038,7 +4038,7 @@
         "display": "external_monitor",
         "value": false
       },
-      "nextQuestion": 27
+      "nextQuestion": 29
     },
     {
       "id": "15",
@@ -4056,7 +4056,7 @@
         "display": "external_inputs",
         "value": false
       },
-      "nextQuestion": 30
+      "nextQuestion": 32
     },
     {
       "id": "17",
@@ -4065,7 +4065,7 @@
         "display": "ram_detail",
         "value": true
       },
-      "nextQuestion": 31
+      "nextQuestion": 30
     },
     {
       "id": "18",
@@ -4074,7 +4074,7 @@
         "display": "ram_detail",
         "value": false
       },
-      "nextQuestion": 36
+      "nextQuestion": 38
     },
     {
       "id": "19",
@@ -4083,7 +4083,7 @@
         "display": "more_ram",
         "value": true
       },
-      "nextQuestion": 34
+      "nextQuestion": 36
     },
     {
       "id": "20",
@@ -4092,7 +4092,7 @@
         "display": "more_ram",
         "value": false
       },
-      "nextQuestion": 36
+      "nextQuestion": 38
     },
     {
       "id": "21",
@@ -4101,7 +4101,7 @@
         "display": "different_brand",
         "value": true
       },
-      "nextQuestion": 38
+      "nextQuestion": 40
     },
     {
       "id": "22",
@@ -4110,7 +4110,7 @@
         "display": "different_brand",
         "value": false
       },
-      "nextQuestion": 39
+      "nextQuestion": 41
     },
     {
       "id": "23",
@@ -4119,7 +4119,7 @@
         "display": "need_sensor",
         "value": true
       },
-      "nextQuestion": 41
+      "nextQuestion": 43
     },
     {
       "id": "24",
@@ -4128,21 +4128,12 @@
         "display": "need_sensor",
         "value": false
       },
-      "nextQuestion": 42
-    },
-    {
-      "id": "25",
-      "action": "enable",
-      "parameter": {
-        "display": "brand_apple",
-        "value": true
-      },
-      "nextQuestion": 2
+      "nextQuestion": null
     }
   ],
   "rules_v2_complex": [
     {
-      "id": "1",
+      "id": "0",
       "operations": [
         ">",
         {
@@ -4159,6 +4150,42 @@
         {
           "display": "Product_Brand",
           "value": "Apple"
+        },
+        {
+          "display": "UEFI",
+          "value": true
+        },
+        {
+          "display": "different_brand",
+          "value": false
+        },
+        {
+          "display": "notebook_type",
+          "value": false
+        },
+        {
+          "display": "Release",
+          "value": "2020"
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "operations": [
+        {
+          "display": "biometric",
+          "value": false
+        },
+        "AND",
+        {
+          "display": "notebook_type",
+          "value": false
+        }
+      ],
+      "setAnswers": [
+        {
+          "display": "keyboard_variants",
+          "value": false
         }
       ]
     }
@@ -5036,7 +5063,7 @@
       "question": "Необходимо ли вам наличие UEFI?",
       "type": "yes/no",
       "parameter": null,
-      "attribute": null,
+      "attribute": "UEFI",
       "nextQuestion": 37,
       "answers": null
     },
@@ -5366,7 +5393,7 @@
       "type": "single_choose",
       "parameter": null,
       "attribute": "Refresh_Rate",
-      "nextQuestion": 14,
+      "nextQuestion": 15,
       "answers": [
         {
           "display": "60",
@@ -5392,7 +5419,7 @@
       "type": "single_choose",
       "parameter": null,
       "attribute": "Refresh_Rate",
-      "nextQuestion": 15,
+      "nextQuestion": 16,
       "answers": [
         {
           "display": "120",
@@ -6054,7 +6081,7 @@
       "question": "Необходимо ли вам наличие UEFI?",
       "type": "yes/no",
       "parameter": null,
-      "attribute": null,
+      "attribute": "UEFI",
       "nextQuestion": 39,
       "answers": null
     },

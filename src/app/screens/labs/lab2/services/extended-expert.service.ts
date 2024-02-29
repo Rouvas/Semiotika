@@ -182,8 +182,9 @@ export class ExtendedExpertService {
   }
 
   findDevices() {
+    console.log('Выполнилось')
     const selectedAttributes = this.selectedAttributes.getValue();
-    console.log(selectedAttributes)
+    console.log(selectedAttributes);
     const dataset = this.dataset.getValue();
 
     // Группируем атрибуты по ключам
@@ -203,16 +204,32 @@ export class ExtendedExpertService {
         // Проверяем, есть ли у элемента заданный ключ
         if (el[key] === undefined) return false;
         if (key === 'Price') {
-          return Number(groupedAttributes[key][0]) < el[key]
+          return Number(groupedAttributes[key][0]) > Number(el[key])
         }
         const elValue = el[key].toString();
         // Проверяем, соответствует ли значение элемента хотя бы одному из выбранных значений атрибута
-        console.log(groupedAttributes[key].includes(elValue))
         return groupedAttributes[key].includes(elValue);
       });
     });
 
     this.findNotebooks.next(newDataset)
+  }
+
+  setUsedComplexRule(id: number) {
+    let rules = this.getComplexRules()
+    rules = rules.map(el => {
+      console.log(id)
+      console.log(el.id)
+      if (el.id == id) {
+        return {
+          ...el,
+          used: true
+        }
+      } else {
+        return el
+      }
+    })
+    this.complexRules.next(rules);
   }
 
 }

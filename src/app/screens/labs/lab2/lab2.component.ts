@@ -11,7 +11,7 @@ import {
 } from "@angular/forms";
 import {TuiButtonModule, TuiLoaderModule, TuiTextfieldControllerModule} from "@taiga-ui/core";
 import {TuiCheckboxLabeledModule, TuiInputNumberModule, TuiRadioLabeledModule} from "@taiga-ui/kit";
-import {Observable, take, takeWhile} from "rxjs";
+import {debounceTime, Observable, take, takeWhile} from "rxjs";
 import {IAnswer, IQuestion} from "../../../common/interfaces/IQuestion";
 import {INotebook} from "../../../common/interfaces/INotebook";
 import {ToolsService} from "../../../common/services/tools.service";
@@ -70,45 +70,44 @@ export class Lab2Component implements OnInit, OnDestroy {
         const selectedAttributes = this.expert.getAttributes();
         const complexRules = this.expert.getComplexRules();
 
+
         const concatAttributes = selectedParameters.concat(selectedAttributes)
         const evaluateComplexRules = this.evaluateRules(concatAttributes, complexRules)
 
-        evaluateComplexRules.map(el => {
-          if (el.used) {
-            return el
-          } else {
-            el.setAnswers.forEach(answer => {
-              const findParameter = this.expert.getQuestions().find(question => {
-                if (question.parameter) {
-                  return question.parameter === answer.display
-                } else {
-                  return false
-                }
-              })
-              if (findParameter) {
-                console.log('Set parameter')
-                this.expert.addAnswer(answer, 'parameter')
+        evaluateComplexRules.forEach(rule => {
+          if (rule.used) return;
+
+          rule.setAnswers.forEach(answer => {
+            const findParameter = this.expert.getQuestions().find(question => {
+              if (question.parameter) {
+                return question.parameter === answer.display
               } else {
-                console.log('Set attribute')
-                this.expert.addAnswer(answer, 'attribute')
+                return false
               }
             })
-            return {
-              ...el,
-              used: true
+            if (findParameter) {
+              console.log('Set parameter ', findParameter)
+              this.expert.addAnswer(answer, 'parameter')
+            } else {
+              console.log('Set attribute ', answer.display)
+              this.expert.addAnswer(answer, 'attribute')
             }
-          }
+          })
+
+        this.expert.setUsedComplexRule(rule.id)
+
         })
 
-        if (!question) {
-          this.expert.findDevices();
 
+        if (!question) {
           if (this.expert.getCounter() > 1) {
+            this.expert.findDevices();
             this.loading = 'complete';
           }
-
           return;
         }
+
+        console.log(question)
 
         if (question.parameter) {
           const findSelectedParameter = selectedParameters.find(selected => {
@@ -121,8 +120,8 @@ export class Lab2Component implements OnInit, OnDestroy {
             if (foundParameter) {
               const nextQuestion = this.expert.getQuestion(foundParameter.nextQuestion);
               if (!nextQuestion) {
-                this.expert.findDevices();
-                this.loading = 'complete';
+                // this.expert.findDevices();
+                // this.loading = 'complete';
                 return;
               }
               this.expert.showQuestion(nextQuestion);
@@ -132,22 +131,26 @@ export class Lab2Component implements OnInit, OnDestroy {
               this.answerControl.reset();
             }
           }
-
         } else if (question.attribute) {
+          console.log('Нашли атрибут ', question.attribute)
           const findSelectedAttribute = selectedAttributes.find(attr => attr.display === question.attribute)
           if (findSelectedAttribute) {
             if (question.attribute === findSelectedAttribute.display) {
-              const nextQuestion = this.expert.getQuestion(question.nextQuestion)
-              if (!nextQuestion) {
-                this.expert.findDevices();
-                this.loading = 'complete';
-                return;
-              }
-              this.expert.showQuestion(nextQuestion);
-              if (question.type === 'multi_choose') {
-                this.processMultiQuestion(question);
-              }
-              this.answerControl.reset();
+              this.loading = 'loading';
+              setTimeout(() => {
+                const nextQuestion = this.expert.getQuestion(question.nextQuestion)
+                if (!nextQuestion) {
+                  this.expert.findDevices();
+                  this.loading = 'complete';
+                  return;
+                }
+                this.expert.showQuestion(nextQuestion);
+                if (question.type === 'multi_choose') {
+                  this.processMultiQuestion(question);
+                }
+                this.answerControl.reset();
+                this.loading = 'question'
+              }, 1)
             }
           }
 
@@ -311,7 +314,10 @@ export class Lab2Component implements OnInit, OnDestroy {
         }
         const nextQuestion = this.expert.getQuestion(findMatchSimpleRule.nextQuestion);
         if (nextQuestion) {
-          this.expert.showQuestion(nextQuestion)
+          this.expert.showQuestion(nextQuestion);
+          if (question.type === 'multi_choose') {
+            console.log('Сработало')
+          }
           this.answerControl.reset();
           this.loading = "question"
           return;
@@ -320,6 +326,8 @@ export class Lab2Component implements OnInit, OnDestroy {
         }
       } else {
         console.error('Не найден параметр указанный в правиле в вопросе или не найден параметр в правиле')
+        console.log('Возможно, это комплексное правило и так как мы не ищем такие, просто запишем его')
+        this.expert.addAnswer({display: question.parameter, value: this.answerControl.getRawValue()}, 'parameter')
       }
 
       this.loading = 'question';
@@ -349,9 +357,10 @@ export class Lab2Component implements OnInit, OnDestroy {
     const nextQuestion = this.expert.getQuestion(question.nextQuestion)
     if (nextQuestion) {
       this.expert.showQuestion(nextQuestion);
-      if (question.type === 'multi_choose') {
-        this.processMultiQuestion(question)
+      if (nextQuestion.type === 'multi_choose') {
+        this.processMultiQuestion(nextQuestion)
       }
+
       this.answerControl.reset();
       this.loading = 'question';
       return;
