@@ -1,0 +1,1004 @@
+{
+  "questions_v1": [
+    {
+      "id": "0",
+      "question": "Какой модельный год вас интересует?",
+      "type": "multi_choose",
+      "parameter": null,
+      "attribute": "Release",
+      "nextQuestion": 1,
+      "answers": [
+        {
+          "display": "2018",
+          "value": "2018"
+        },
+        {
+          "display": "2019",
+          "value": "2019"
+        },
+        {
+          "display": "2020",
+          "value": "2020"
+        },
+        {
+          "display": "2021",
+          "value": "2021"
+        },
+        {
+          "display": "2022",
+          "value": "2022"
+        },
+        {
+          "display": "2023",
+          "value": "2023"
+        }
+      ]
+    },
+    {
+      "id": "1",
+      "question": "Какая диагональ экрана вас интересует?",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "Screen_Size",
+      "nextQuestion": 2,
+      "answers": [
+        {
+          "display": "10",
+          "value": "10"
+        },
+        {
+          "display": "11",
+          "value": "11"
+        },
+        {
+          "display": "12",
+          "value": "12"
+        },
+        {
+          "display": "13",
+          "value": "13"
+        },
+        {
+          "display": "14",
+          "value": "14"
+        },
+        {
+          "display": "15",
+          "value": "15"
+        },
+        {
+          "display": "16",
+          "value": "16"
+        },
+        {
+          "display": "17",
+          "value": "17"
+        },
+        {
+          "display": "18",
+          "value": "18"
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "question": "Необходимо ли вам наличие разъема(ов) Type-C?",
+      "type": "yes/no",
+      "parameter": "typec",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "3",
+      "question": "Какое количество портов Type-C вам необходимо?",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "USB-C_Ports",
+      "nextQuestion": 4,
+      "answers": [
+        {
+          "display": "1",
+          "value": "1"
+        },
+        {
+          "display": "2",
+          "value": "2"
+        },
+        {
+          "display": "3",
+          "value": "3"
+        },
+        {
+          "display": "4",
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "question": "Необходима ли вам зарядка через Type-C?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 5,
+      "answers": null
+    },
+    {
+      "id": "5",
+      "question": "Необходима ли вам поддержка технологии Thunderbolt 3?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 6,
+      "answers": null
+    },
+    {
+      "id": "6",
+      "question": "Необходима ли вам поддержка технологии Thunderbolt 4?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 7,
+      "answers": null
+    },
+    {
+      "id": "7",
+      "question": "Необходимо ли вам наличие систем биометрической индентификации?",
+      "type": "yes/no",
+      "parameter": "biometric",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "8",
+      "question": "Необходимо наличие Touch ID (по отпечатку пальца)?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 9,
+      "answers": null
+    },
+    {
+      "id": "9",
+      "question": "Необходимо наличие Face Unlock (по лицу)?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 10,
+      "answers": null
+    },
+    {
+      "id": "10",
+      "question": "Вы рассматриваете игровой ноутбук?",
+      "type": "yes/no",
+      "parameter": "notebook_type",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "11",
+      "question": "Выберите подходящую частоту экрана для вашего комфорта (60-144)",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "Refresh_Rate",
+      "nextQuestion": 13,
+      "answers": [
+        {
+          "display": "60",
+          "value": "60"
+        },
+        {
+          "display": "90",
+          "value": "90"
+        },
+        {
+          "display": "120",
+          "value": "120"
+        },
+        {
+          "display": "144",
+          "value": "144"
+        }
+      ]
+    },
+    {
+      "id": "12",
+      "question": "Выберите подходящую частоту экрана для вашего комфорта (120-480)",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "Refresh_Rate",
+      "nextQuestion": 14,
+      "answers": [
+        {
+          "display": "120",
+          "value": "120"
+        },
+        {
+          "display": "144",
+          "value": "144"
+        },
+        {
+          "display": "165",
+          "value": "165"
+        },
+        {
+          "display": "240",
+          "value": "240"
+        },
+        {
+          "display": "300",
+          "value": "300"
+        },
+        {
+          "display": "480",
+          "value": "480"
+        }
+      ]
+    },
+    {
+      "id": "13",
+      "question": "Вам необходимо подобрать определенную видеокарту?",
+      "type": "yes/no",
+      "parameter": "videocard",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "14",
+      "question": "Выберите подходящий для вас бренд видеокарты",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "GPU_Brand",
+      "nextQuestion": 15,
+      "answers": [
+        {
+          "display": "Intel",
+          "value": "Intel"
+        },
+        {
+          "display": "NVIDIA",
+          "value": "NVIDIA"
+        },
+        {
+          "display": "AMD",
+          "value": "AMD"
+        },
+        {
+          "display": "Apple",
+          "value": "Apple"
+        },
+        {
+          "display": "ARM",
+          "value": "ARM"
+        },
+        {
+          "display": "Qualcomm",
+          "value": "Qualcomm"
+        }
+      ]
+    },
+    {
+      "id": "15",
+      "question": "Выберите подходящую модель видеокарты",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "GPU_Model",
+      "nextQuestion": 16,
+      "answers": [
+        {
+          "display": "Adreno 618",
+          "value": "Adreno 618"
+        },
+        {
+          "display": "Arc A370M",
+          "value": "Arc A370M"
+        },
+        {
+          "display": "GTX 1650",
+          "value": "GTX 1650"
+        },
+        {
+          "display": "GTX 1650 Ti",
+          "value": "GTX 1650 Ti"
+        },
+        {
+          "display": "HD 400",
+          "value": "HD 400"
+        },
+        {
+          "display": "Iris",
+          "value": "Iris"
+        },
+        {
+          "display": "M1",
+          "value": "M1"
+        },
+        {
+          "display": "M1 Max",
+          "value": "M1 Max"
+        },
+        {
+          "display": "M1 Pro",
+          "value": "M1 Pro"
+        },
+        {
+          "display": "M2",
+          "value": "M2"
+        },
+        {
+          "display": "M2 Pro",
+          "value": "M2 Pro"
+        },
+        {
+          "display": "M3 Max",
+          "value": "M3 Max"
+        },
+        {
+          "display": "M3 Pro",
+          "value": "M3 Pro"
+        },
+        {
+          "display": "Mali-G72",
+          "value": "Mali-G72"
+        },
+        {
+          "display": "MX350",
+          "value": "MX350"
+        },
+        {
+          "display": "Quadro",
+          "value": "Quadro"
+        },
+        {
+          "display": "Radeon",
+          "value": "Radeon"
+        },
+        {
+          "display": "Radeon 780M",
+          "value": "Radeon 780M"
+        },
+        {
+          "display": "Radeon Pro 5500M",
+          "value": "Radeon Pro 5500M"
+        },
+        {
+          "display": "Radeon RX 6700S",
+          "value": "Radeon RX 6700S"
+        },
+        {
+          "display": "Radeon RX 7600M XT",
+          "value": "Radeon RX 7600M XT"
+        },
+        {
+          "display": "Radeon RX 7600S",
+          "value": "Radeon RX 7600S"
+        },
+        {
+          "display": "Radeon RX Vega 6",
+          "value": "Radeon RX Vega 6"
+        },
+        {
+          "display": "Radeon Vega 9",
+          "value": "Radeon Vega 9"
+        },
+        {
+          "display": "RTX 2050",
+          "value": "RTX 2050"
+        },
+        {
+          "display": "RTX 2080 SUPER",
+          "value": "RTX 2080 SUPER"
+        },
+        {
+          "display": "RTX 3050",
+          "value": "RTX 3050"
+        },
+        {
+          "display": "RTX 3070 Ti",
+          "value": "RTX 3070 Ti"
+        },
+        {
+          "display": "RTX 3080 Ti",
+          "value": "RTX 3080 Ti"
+        },
+        {
+          "display": "RTX 4050",
+          "value": "RTX 4050"
+        },
+        {
+          "display": "RTX 4060",
+          "value": "RTX 4060"
+        },
+        {
+          "display": "RTX 4070",
+          "value": "RTX 4070"
+        },
+        {
+          "display": "RTX 4080",
+          "value": "RTX 4080"
+        },
+        {
+          "display": "RTX A1000",
+          "value": "RTX A1000"
+        },
+        {
+          "display": "RTX A2000",
+          "value": "RTX A2000"
+        },
+        {
+          "display": "RTX A3000",
+          "value": "RTX A3000"
+        },
+        {
+          "display": "UHD",
+          "value": "UHD"
+        }
+      ]
+    },
+    {
+      "id": "16",
+      "question": "Какой бренд процессора вы рассматриваете?",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "CPU_Brand",
+      "nextQuestion": 17,
+      "answers": [
+        {
+          "display": "Intel",
+          "value": "Intel"
+        },
+        {
+          "display": "AMD",
+          "value": "AMD"
+        },
+        {
+          "display": "Apple",
+          "value": "Apple"
+        },
+        {
+          "display": "MediaTek",
+          "value": "MediaTek"
+        },
+        {
+          "display": "Qualcomm",
+          "value": "Qualcomm"
+        }
+      ]
+    },
+    {
+      "id": "17",
+      "question": "Какую модель процессора вы рассматриваете?",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "CPU_Model",
+      "nextQuestion": 18,
+      "answers": [
+        {
+          "display": "Core i7",
+          "value": "Core i7"
+        },
+        {
+          "display": "Core i5",
+          "value": "Core i5"
+        },
+        {
+          "display": "Ryzen",
+          "value": "Ryzen"
+        },
+        {
+          "display": "Core i3",
+          "value": "Core i3"
+        },
+        {
+          "display": "Celeron",
+          "value": "Celeron"
+        },
+        {
+          "display": "Core i9",
+          "value": "Core i9"
+        },
+        {
+          "display": "Pentium",
+          "value": "Pentium"
+        },
+        {
+          "display": "Snapdragon",
+          "value": "Snapdragon"
+        },
+        {
+          "display": "M2",
+          "value": "M2"
+        },
+        {
+          "display": "Atom",
+          "value": "Atom"
+        },
+        {
+          "display": "M1",
+          "value": "M1"
+        },
+        {
+          "display": "M1 Max",
+          "value": "M1 Max"
+        },
+        {
+          "display": "Intel",
+          "value": "Intel"
+        },
+        {
+          "display": "M1 Pro",
+          "value": "M1 Pro"
+        },
+        {
+          "display": "M2 Pro",
+          "value": "M2 Pro"
+        },
+        {
+          "display": "M3 Max",
+          "value": "M3 Max"
+        },
+        {
+          "display": "M3 Pro",
+          "value": "M3 Pro"
+        },
+        {
+          "display": "MT8183",
+          "value": "MT8183"
+        },
+        {
+          "display": "Helio P60T",
+          "value": "Helio P60T"
+        },
+        {
+          "display": "Core m3",
+          "value": "Core m3"
+        }
+      ]
+    },
+    {
+      "id": "18",
+      "question": "Есть ли у вас предпочтение по количеству ядер процессора?",
+      "type": "yes/no",
+      "parameter": "core_counter",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "19",
+      "question": "Необходимое количество ядер процессора",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "Core_Count",
+      "nextQuestion": 20,
+      "answers": [
+        {
+          "display": "2",
+          "value": "2"
+        },
+        {
+          "display": "4",
+          "value": "4"
+        },
+        {
+          "display": "6",
+          "value": "6"
+        },
+        {
+          "display": "8",
+          "value": "8"
+        },
+        {
+          "display": "10",
+          "value": "10"
+        },
+        {
+          "display": "11",
+          "value": "11"
+        },
+        {
+          "display": "12",
+          "value": "12"
+        },
+        {
+          "display": "14",
+          "value": "14"
+        },
+        {
+          "display": "16",
+          "value": "16"
+        }
+      ]
+    },
+    {
+      "id": "20",
+      "question": "Имеются ли у вас предпочтения по клавиатуре?",
+      "type": "yes/no",
+      "parameter": "keyboard_variants",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "21",
+      "question": "Какой тип клавиатуры вы рассматриваете?",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "Keyboard_Type",
+      "nextQuestion": 22,
+      "answers": [
+        {
+          "display": "Membrane",
+          "value": "Membrane"
+        },
+        {
+          "display": "Scissor",
+          "value": "Scissor"
+        },
+        {
+          "display": "Mechanical",
+          "value": "Mechanical"
+        }
+      ]
+    },
+    {
+      "id": "22",
+      "question": "Необходима ли подсветка у клавиатуры?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 23,
+      "answers": null
+    },
+    {
+      "id": "23",
+      "question": "Необходима ли клавиши дополнительных действий?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 24,
+      "answers": null
+    },
+    {
+      "id": "24",
+      "question": "Собираетесь ли вы использовать внешний монитор?",
+      "type": "yes/no",
+      "parameter": "external_monitor",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "25",
+      "question": "Необходимo ли вам наличие HDMI?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 26,
+      "answers": null
+    },
+    {
+      "id": "26",
+      "question": "Необходимо ли вам наличие поддержки вывода через Type-C?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 27,
+      "answers": null
+    },
+    {
+      "id": "27",
+      "question": "Необходимы ли вам дополнительные разъемы?",
+      "type": "yes/no",
+      "parameter": "external_inputs",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "28",
+      "question": "Необходим ли вам разъем RJ-45?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 29,
+      "answers": null
+    },
+    {
+      "id": "29",
+      "question": "Необходим ли вам разъем 3.5 Jack?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 30,
+      "answers": null
+    },
+    {
+      "id": "30",
+      "question": "Есть ли у вас предпочтения по кол-ву оперативной памяти?",
+      "type": "yes/no",
+      "parameter": "ram_detail",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "31",
+      "question": "Какой тип памяти вы рассматриваете?",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "RAM_Type",
+      "nextQuestion": 32,
+      "answers": [
+        {
+          "display": "DDR3",
+          "value": "DDR3"
+        },
+        {
+          "display": "DDR4",
+          "value": "DDR4"
+        },
+        {
+          "display": "DDR5",
+          "value": "DDR5"
+        }
+      ]
+    },
+    {
+      "id": "32",
+      "question": "Какой размер памяти вы рассматриваете?",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "RAM_Capacity",
+      "nextQuestion": 33,
+      "answers": [
+        {
+          "display": "4",
+          "value": "4"
+        },
+        {
+          "display": "6",
+          "value": "6"
+        },
+        {
+          "display": "8",
+          "value": "8"
+        },
+        {
+          "display": "16",
+          "value": "16"
+        },
+        {
+          "display": "18",
+          "value": "18"
+        },
+        {
+          "display": "32",
+          "value": "32"
+        },
+        {
+          "display": "48",
+          "value": "48"
+        },
+        {
+          "display": "64",
+          "value": "64"
+        }
+      ]
+    },
+    {
+      "id": "33",
+      "question": "Собираетесь ли вы расширять оперативную память?",
+      "type": "yes/no",
+      "parameter": "more_ram",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "34",
+      "question": "Количество слотов для оперативной памяти",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "RAM_Slots",
+      "nextQuestion": 35,
+      "answers": [
+        {
+          "display": "1",
+          "value": "1"
+        },
+        {
+          "display": "2",
+          "value": "2"
+        },
+        {
+          "display": "3",
+          "value": "3"
+        },
+        {
+          "display": "4",
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "id": "35",
+      "question": "Максимальное количество поддерживаемого объёма RAM",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "RAM_Max",
+      "nextQuestion": 36,
+      "answers": [
+        {
+          "display": "4",
+          "value": "4"
+        },
+        {
+          "display": "6",
+          "value": "6"
+        },
+        {
+          "display": "8",
+          "value": "8"
+        },
+        {
+          "display": "16",
+          "value": "16"
+        },
+        {
+          "display": "18",
+          "value": "18"
+        },
+        {
+          "display": "32",
+          "value": "32"
+        },
+        {
+          "display": "48",
+          "value": "48"
+        },
+        {
+          "display": "64",
+          "value": "64"
+        }
+      ]
+    },
+    {
+      "id": "36",
+      "question": "Необходимо ли вам наличие UEFI?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 37,
+      "answers": null
+    },
+    {
+      "id": "37",
+      "question": "Важен ли вам бренд?",
+      "type": "yes/no",
+      "parameter": "different_brand",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "38",
+      "question": "Выберите бренд ноутбука",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "Product_Brand",
+      "nextQuestion": 39,
+      "answers": [
+        {
+          "display": "Lenovo",
+          "value": "Lenovo"
+        },
+        {
+          "display": "HP",
+          "value": "HP"
+        },
+        {
+          "display": "ASUS",
+          "value": "ASUS"
+        },
+        {
+          "display": "Dell",
+          "value": "Dell"
+        },
+        {
+          "display": "Acer",
+          "value": "Acer"
+        },
+        {
+          "display": "Apple",
+          "value": "Apple"
+        },
+        {
+          "display": "Microsoft",
+          "value": "Microsoft"
+        },
+        {
+          "display": "Framework",
+          "value": "Framework"
+        },
+        {
+          "display": "LG",
+          "value": "LG"
+        },
+        {
+          "display": "Razer",
+          "value": "Razer"
+        },
+        {
+          "display": "Thomson",
+          "value": "Thomson"
+        },
+        {
+          "display": "Samsung",
+          "value": "Samsung"
+        },
+        {
+          "display": "Google",
+          "value": "Google"
+        }
+      ]
+    },
+    {
+      "id": "39",
+      "question": "Какое разрешение экрана вам необходимо",
+      "type": "single_choose",
+      "parameter": null,
+      "attribute": "Resolution",
+      "nextQuestion": 40,
+      "answers": [
+        {
+          "display": "HD",
+          "value": "HD"
+        },
+        {
+          "display": "FULL HD",
+          "value": "FULL HD"
+        },
+        {
+          "display": "2K",
+          "value": "2K"
+        },
+        {
+          "display": "4K",
+          "value": "4K"
+        }
+      ]
+    },
+    {
+      "id": "40",
+      "question": "Важно ли вам наличие сенсора у ноутбука?",
+      "type": "yes/no",
+      "parameter": "need_sensor",
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    },
+    {
+      "id": "41",
+      "question": "Необходим ли вам сенсор?",
+      "type": "yes/no",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": 42,
+      "answers": null
+    },
+    {
+      "id": "42",
+      "question": "Ваш бюджет, который вы готовы потратить на ноутбук",
+      "type": "input",
+      "parameter": null,
+      "attribute": null,
+      "nextQuestion": null,
+      "answers": null
+    }
+  ]
+}

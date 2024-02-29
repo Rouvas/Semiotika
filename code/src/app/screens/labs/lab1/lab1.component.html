@@ -1,0 +1,83 @@
+<div class="w-full h-full flex items-center justify-center">
+  <div class="bg-white p-4 rounded shadow w-full max-w-xl overflow-hidden" *ngIf="loading === 'loading' || loading === 'question'; else Complete">
+    <ng-container *ngIf="currentQuestion | async as question; else Loading">
+      <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 -mx-4 -mt-4 px-4 py-4 flex items-center space-x-2">
+        <h2 class="text-xl text-white">Вопрос №{{counterQuestion | async}}</h2>
+      </div>
+      <h3 class="text-base mt-4">{{question.question}}</h3>
+      <form class="mt-2 grid" (ngSubmit)="answerQuestion(question)">
+        <ng-container [ngSwitch]="question.type">
+          <ng-template ngSwitchCase="multi_choose">
+            <ng-container *ngIf="question.answers; else ErrorLoading">
+              <form [formGroup]="multiAnswersForm" class="block">
+                <div class="grid gap-2" formArrayName="answers">
+                  <div class="block" *ngFor="let answerGroup of multiAnswerFormArray.controls; let i=index" [formGroupName]="i">
+                    <tui-checkbox-labeled [formControlName]="getControlName(i)">
+                      {{question.answers[i].display}}
+                    </tui-checkbox-labeled>
+                  </div>
+                </div>
+              </form>
+            </ng-container>
+          </ng-template>
+          <ng-template ngSwitchCase="single_choose">
+            <div class="grid gap-2">
+              <ng-container *ngIf="question.answers; else ErrorLoading">
+                <tui-radio-labeled [formControl]="answerControl" [item]="answer.value" *ngFor="let answer of question.answers">
+                  {{answer.display}}
+                </tui-radio-labeled>
+              </ng-container>
+            </div>
+          </ng-template>
+          <ng-template ngSwitchCase="input">
+            <tui-input-number tuiTextfieldSize="m" [formControl]="answerControl">
+              Введите число
+            </tui-input-number>
+          </ng-template>
+          <ng-template ngSwitchCase="yes/no">
+            <div class="grid gap-2">
+              <tui-radio-labeled [formControl]="answerControl" [item]="true">Да</tui-radio-labeled>
+              <tui-radio-labeled [formControl]="answerControl" [item]="false">Нет</tui-radio-labeled>
+            </div>
+          </ng-template>
+        </ng-container>
+
+
+        <button class="justify-self-end mt-2" tuiButton size="m" [showLoader]="loading === 'loading'" type="submit">Ответить</button>
+       </form>
+      <div class="h-[1px] w-full bg-slate-200 my-2"></div>
+      <div class="text-sm text-slate-850 mb-1.5">Справочная информация</div>
+      <ul class="grid gap-0.5">
+        <li class="text-xs text-slate-850"> Тип вопроса: {{question.type}} </li>
+        <li class="text-xs text-slate-850"> id вопроса: {{question.id}} </li>
+      </ul>
+
+    </ng-container>
+  </div>
+  <ng-template #Complete>
+    <div class="bg-white p-4 rounded shadow w-full max-w-xl overflow-hidden">
+      <div class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 -mx-4 -mt-4 px-4 py-4 flex items-center space-x-2">
+        <h2 class="text-xl text-white">Похоже, мы вам что-то подобрали</h2>
+      </div>
+
+      <ol class="flex flex-col space-y-1.5 mt-4" *ngIf="findNotebooks | async as notebooks">
+        <ng-container *ngIf="notebooks.length > 0; else NotFind">
+          <li class="text-sm text-slate-800" *ngFor="let el of notebooks; let i = index">
+            {{ i + 1 }}. {{ el.Product }}
+          </li>
+        </ng-container>
+        <ng-template #NotFind>
+          <div class="text-sm text-red-500">К сожалению, ничего не найдено</div>
+        </ng-template>
+      </ol>
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #Loading>
+  <tui-loader></tui-loader>
+</ng-template>
+
+<ng-template #ErrorLoading>
+  <div class="text-3xl w-full text-center">Ошибка загрузки ответов</div>
+</ng-template>

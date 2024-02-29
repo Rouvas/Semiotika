@@ -1,0 +1,153 @@
+{
+    "0": {
+        "attributes": {
+        },
+        "enable": [
+            1
+        ]
+    },
+    "1": {
+        "parameters": {
+          "typec": true
+        },
+        "enable": 4
+    },
+    "2": {
+        "parameters": {
+          "typec": false
+        },
+        "enable": 8
+    },
+    "3": {
+        "parameters": {
+          "biometric": true
+        },
+        "enable": 9
+    },
+    "4": {
+        "parameters": {
+          "biometric": false
+        },
+        "enable": 11
+    },
+    "5": {
+        "parameters": {
+          "notebook_type": true
+        },
+        "enable": 13
+    },
+    "6": {
+        "parameters": {
+          "notebook_type": false
+        },
+        "enable": 12
+    },
+    "7": {
+        "parameters": {
+          "videocard": true
+        },
+        "enable": 15
+    },
+    "8": {
+        "parameters": {
+          "videocard": false
+        },
+        "enable": 17
+    },
+    "9": {
+        "parameters": {
+          "core_counter": true
+        },
+        "enable": 20
+    },
+    "10": {
+        "parameters": {
+          "core_counter": false
+        },
+        "enable": 21
+    },
+    "11": {
+        "parameters": {
+          "keyboard_variants": true
+        },
+        "enable": 22
+    },
+    "12": {
+        "parameters": {
+          "keyboard_variants": false
+        },
+        "enable": 25
+    },
+    "13": {
+        "parameters": {
+          "external_monitor": true
+        },
+        "enable": 26
+    },
+    "14": {
+        "parameters": {
+          "external_monitor": false
+        },
+        "enable": 28
+    },
+    "15": {
+        "parameters": {
+          "external_inputs": true
+        },
+        "enable": 29
+    },
+    "16": {
+        "parameters": {
+          "external_inputs": false
+        },
+        "enable": 31
+    },
+    "17": {
+        "parameters": {
+          "ram_detail": true
+        },
+        "enable": 32
+    },
+    "18": {
+        "parameters": {
+          "ram_detail": false
+        },
+        "enable": 37
+    },
+    "19": {
+        "parameters": {
+          "more_ram": true
+        },
+        "enable": 35
+    },
+    "20": {
+        "parameters": {
+          "more_ram": false
+        },
+        "enable": 37
+    },
+    "21": {
+        "parameters": {
+          "different_brand": true
+        },
+        "enable": 39
+    },
+    "22": {
+        "parameters": {
+          "different_brand": false
+        },
+        "enable": 40
+    },
+    "23": {
+        "parameters": {
+          "need_sensor": true
+        },
+        "enable": 42
+    },
+    "24": {
+        "parameters": {
+          "need_sensor": false
+        },
+        "enable": 43
+    }
+}
