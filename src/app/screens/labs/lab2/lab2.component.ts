@@ -107,8 +107,6 @@ export class Lab2Component implements OnInit, OnDestroy {
           return;
         }
 
-        console.log(question)
-
         if (question.parameter) {
           const findSelectedParameter = selectedParameters.find(selected => {
             return question.parameter === selected.display
@@ -132,7 +130,6 @@ export class Lab2Component implements OnInit, OnDestroy {
             }
           }
         } else if (question.attribute) {
-          console.log('Нашли атрибут ', question.attribute)
           const findSelectedAttribute = selectedAttributes.find(attr => attr.display === question.attribute)
           if (findSelectedAttribute) {
             if (question.attribute === findSelectedAttribute.display) {
