@@ -133,7 +133,7 @@ export class ExtendedExpertService {
   }
 
   fetchSimpleRules() {
-    return this.http.get('/rules_v1')
+    return this.http.get('/rules_v2_simple')
   }
 
   setSimpleRules(data: any[]) {
@@ -156,7 +156,7 @@ export class ExtendedExpertService {
   }
 
   fetchComplexRules() {
-    return this.http.get('/rules_v2')
+    return this.http.get('/rules_v2_complex')
   }
 
   setComplexRules(data: any[]) {
