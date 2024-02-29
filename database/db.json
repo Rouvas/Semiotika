@@ -3,7 +3,7 @@
     {
       "Product_Brand": "Lenovo",
       "Release": "2021",
-      "Screen_Size": "13",
+      "Screen_Size": "10",
       "RAM_Slots": 0,
       "Resolution": "FULL HD",
       "Touch_Screen": true,
@@ -31,7 +31,7 @@
       "Keyboard_SoftButtons": false,
       "UEFI": true,
       "Sensor": false,
-      "Price": 145000,
+      "Price": 12000,
       "Product": "Lenovo Chromebook Duet 5 (2021)",
       "id": "0"
     },
@@ -4186,6 +4186,174 @@
         {
           "display": "keyboard_variants",
           "value": false
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "operations": [
+        {
+          "display": "brand_apple",
+          "value": false
+        },
+        "AND",
+        "<",
+        {
+          "display": "Price",
+          "value": 30000
+        }
+      ],
+      "setAnswers": [
+        {
+          "display": "Release",
+          "value": "2018"
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "operations": [
+        {
+          "display": "brand_apple",
+          "value": false
+        },
+        "AND",
+        ">",
+        {
+          "display": "Price",
+          "value": 50000
+        }
+      ],
+      "setAnswers": [
+        {
+          "display": "Release",
+          "value": "2019"
+        },
+        {
+          "display": "Release",
+          "value": "2020"
+        },
+        {
+          "display": "Release",
+          "value": "2021"
+        },
+        {
+          "display": "Release",
+          "value": "2022"
+        },
+        {
+          "display": "UEFI",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "operations": [
+        {
+          "display": "Screen_Size",
+          "value": "10"
+        },
+        "AND",
+        "<",
+        {
+          "display": "Price",
+          "value": 20000
+        }
+      ],
+      "setAnswers": [
+        {
+          "display": "CPU_Brand",
+          "value": "Qualcomm"
+        },
+        {
+          "display": "CPU_Model",
+          "value": "Snapdragon"
+        }
+      ]
+    },
+    {
+      "id": "5",
+      "operations": [
+        {
+          "display": "brand_apple",
+          "value": true
+        },
+        "AND",
+        ">",
+        {
+          "display": "Price",
+          "value": 70000
+        }
+      ],
+      "setAnswers": [
+        {
+          "display": "USB-C_Display",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "6",
+      "operations": [
+        {
+          "display": "Thunderbolt_3",
+          "value": true
+        },
+        "OR",
+        {
+          "display": "Thunderbolt_3",
+          "value": true
+        }
+      ],
+      "setAnswers": [
+        {
+          "display": "USB-C_Display",
+          "value": true
+        },
+        {
+          "display": "USB-C_Charging",
+          "value": true
+        }
+      ]
+    },
+    {
+      "id": "7",
+      "operations": [
+        {
+          "display": "notebook_type",
+          "value": true
+        },
+        "AND",
+        {
+          "display": "Price",
+          "value": 60000
+        }
+      ],
+      "setAnswers": [
+        {
+          "display": "RAM_Capacity",
+          "value": "8"
+        },
+        {
+          "display": "RAM_Capacity",
+          "value": "16"
+        },
+        {
+          "display": "RAM_Capacity",
+          "value": "18"
+        },
+        {
+          "display": "RAM_Capacity",
+          "value": "32"
+        },
+        {
+          "display": "RAM_Capacity",
+          "value": "48"
+        },
+        {
+          "display": "RAM_Capacity",
+          "value": "64"
         }
       ]
     }
