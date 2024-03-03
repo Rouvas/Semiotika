@@ -6,7 +6,7 @@ import {debounceTime, take} from "rxjs";
   providedIn: 'root'
 })
 export class HttpService {
-  private url = 'http://localhost:3000';
+  private url = 'https://ra.gaiduchik.com';
 
   constructor(private httpClient: HttpClient) { }
 
